@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felices 3 Meses - Jocaved ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            color: #4a5568;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .header .date {
+            font-size: 1.2rem;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .love-messages {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .love-messages h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .message {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid #4a5568;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .memory-book {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .memory-book h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .book-form {
+            margin-bottom: 20px;
+        }
+        
+        .book-form input, .book-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .book-form input:focus, .book-form textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .add-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .memories-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .memory-item {
+            background: #f7fafc;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .memory-date {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .memory-description {
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        .delete-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            float: right;
+            margin-top: 10px;
+        }
+        
+        .delete-btn:hover {
+            background: #c53030;
+        }
+        
+        .timeline {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            margin-top: 30px;
+            grid-column: 1 / -1;
+        }
+        
+        .timeline h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .milestone {
+            background: linear-gradient(45deg, #48bb78, #38b2ac);
+            color: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>¡Felices 3 Meses Juntos! 💕</h1>
+            <div class="subtitle">Para mi hermosa Jocaved</div>
+            <div class="date" id="currentDate"></div>
+        </div>
+        
+        <div class="content">
+            <div class="love-messages">
+                <h2>Mensajes de Amor 💖</h2>
+                <div class="message">
+                    Mamita, estos 3 meses a tu lado han sido los más hermosos de mi vida. Cada día contigo es una nueva aventura llena de amor y felicidad.
+                </div>
+                <div class="message">
+                    Mi querida Jocaved, tu sonrisa ilumina mis días y tu amor llena mi corazón. Gracias por hacer de cada momento algo especial.
+                </div>
+                <div class="message">
+                    Mi dulce niña, eres la persona más maravillosa que he conocido. Estos 3 meses han sido solo el comienzo de nuestra hermosa historia de amor.
+                </div>
+                <div class="message">
+                    Con cada amanecer, mi amor por ti crece más fuerte, Mi Jocaved. Eres mi inspiración, mi alegría y mi todo.
+                </div>
+            </div>
+            
+            <div class="memory-book">
+                <h2>Libro de Recuerdos 📖</h2>
+                <div class="book-form">
+                    <input type="date" id="memoryDate" placeholder="Fecha">
+                    <textarea id="memoryDescription" placeholder="Describe este momento especial..." rows="3"></textarea>
+                    <button class="add-btn" onclick="addMemory()">Agregar Recuerdo ❤️</button>
+                </div>
+                
+                <div class="memories-list" id="memoriesList">
+                    <div class="memory-item">
+                        <div class="memory-date">Primer encuentro</div>
+                        <div class="memory-description">El día que nos conocimos y cambió todo para siempre...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <h2>Nuestra Historia de Amor 💕</h2>
+            <div class="milestone">
+                🌟 Mes 1: Los primeros "te quiero" y esas mariposas en el estómago
+            </div>
+            <div class="milestone">
+                💕 Mes 2: Mamii, descubrimos lo perfectos que somos juntos
+            </div>
+            <div class="milestone">
+                🎉 Mes 3: ¡Hoy celebramos nuestro amor y los hermosos recuerdos creados!
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mostrar fecha actual
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // Crear corazones flotantes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.querySelector('.hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        // Crear corazones cada 2 segundos
+        setInterval(createHeart, 2000);
+        
+        // Sistema de recuerdos
+        let memories = [];
+        
+        function displayMemories() {
+            const memoriesList = document.getElementById('memoriesList');
+            memoriesList.innerHTML = '';
+            
+            memories.forEach((memory, index) => {
+                const memoryItem = document.createElement('div');
+                memoryItem.className = 'memory-item';
+                memoryItem.innerHTML = `
+                    <div class="memory-date">${formatDate(memory.date)}</div>
+                    <div class="memory-description">${memory.description}</div>
+                    <button class="delete-btn" onclick="deleteMemory(${index})">Eliminar</button>
+                `;
+                memoriesList.appendChild(memoryItem);
+            });
+        }
+        
+        function addMemory() {
+            const dateInput = document.getElementById('memoryDate');
+            const descriptionInput = document.getElementById('memoryDescription');
+            
+            if (dateInput.value && descriptionInput.value) {
+                const newMemory = {
+                    date: dateInput.value,
+                    description: descriptionInput.value
+                };
+                
+                memories.push(newMemory);
+                memories.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                dateInput.value = '';
+                descriptionInput.value = '';
+                
+                displayMemories();
+            } else {
+                alert('Por favor completa todos los campos para agregar el recuerdo 💕');
+            }
+        }
+        
+        function deleteMemory(index) {
+            if (confirm('¿Estás seguro de que quieres eliminar este recuerdo?')) {
+                memories.splice(index, 1);
+                displayMemories();
+            }
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString + 'T00:00:00');
+            return date.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+        
+        // Cargar recuerdos al iniciar
+        displayMemories();
+        
+        // Efecto de entrada suave
+        window.addEventListener('load', () => {
+            document.querySelector('.container').style.opacity = '0';
+            document.querySelector('.container').style.transform = 'translateY(50px)';
+            document.querySelector('.container').style.transition = 'all 1s ease-out';
+            
+            setTimeout(() => {
+                document.querySelector('.container').style.opacity = '1';
+                document.querySelector('.container').style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
